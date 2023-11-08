@@ -1,6 +1,6 @@
 # Dockerfile untuk Core 1
 FROM nginx:latest
-COPY /image /usr/share/nginx/html/images
+COPY image/ /usr/share/nginx/html/images
 EXPOSE 80
 
 
