@@ -1,0 +1,50 @@
+version: '3'
+services:
+  webserver:
+    image: nginx:latest
+    volumes:
+      - images_vol:/usr/share/nginx/html/images
+    ports:
+      - "80:80"
+
+  image_processor_1:
+    build:
+      context: .
+      dockerfile: Dockerfile.processor
+    environment:
+      - DATABASE_HOST=mysqldb
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=my-secret-pw
+      - DATABASE_NAME=imagedb
+
+  image_processor_2:
+    build:
+      context: .
+      dockerfile: Dockerfile.processor
+    environment:
+      - DATABASE_HOST=mysqldb
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=my-secret-pw
+      - DATABASE_NAME=imagedb
+
+  image_processor_3:
+    build:
+      context: .
+      dockerfile: Dockerfile.processor
+    environment:
+      - DATABASE_HOST=mysqldb
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=my-secret-pw
+      - DATABASE_NAME=imagedb
+
+  mysqldb:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+      - MYSQL_DATABASE=imagedb
+    volumes:
+      - db_vol:/var/lib/mysql
+
+volumes:
+  images_vol:
+  db_vol:
